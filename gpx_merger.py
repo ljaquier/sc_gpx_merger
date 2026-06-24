@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import sys
 import xml.etree.ElementTree as ET
 
 ET.register_namespace("", "http://www.topografix.com/GPX/1/1")
@@ -39,11 +38,12 @@ def merge_gpx(output_file, input_files):
     base_tree.write(output_file, encoding="utf-8", xml_declaration=True)
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python gpx_merger.py output.gpx input1.gpx input2.gpx ...")
-        sys.exit(1)
+    import argparse
 
-    output = sys.argv[1]
-    inputs = sys.argv[2:]
+    parser = argparse.ArgumentParser(description='Merge GPX files')
+    parser.add_argument('output_file', help='Output GPX file')
+    parser.add_argument('first_file', help='First GPX files')
+    parser.add_argument('next_files', nargs='+', help='Next GPX files')
+    args = parser.parse_args()
 
-    merge_gpx(output, inputs)
+    merge_gpx(args.output_file, [args.first_file] + args.next_files)

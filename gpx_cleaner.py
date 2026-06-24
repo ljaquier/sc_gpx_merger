@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import sys
 import xml.etree.ElementTree as ET
 
 ET.register_namespace("", "http://www.topografix.com/GPX/1/1")
@@ -48,11 +47,11 @@ def clean_gpx(output_file, input_file):
     base_tree.write(output_file, encoding="utf-8", xml_declaration=True)
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python gpx_cleaner.py output.gpx input.gpx")
-        sys.exit(1)
+    import argparse
 
-    output = sys.argv[1]
-    input = sys.argv[2]
+    parser = argparse.ArgumentParser(description='Clean GPX file')
+    parser.add_argument('output_file', help='Output GPX file')
+    parser.add_argument('input_file', help='Input GPX file')
+    args = parser.parse_args()
 
-    clean_gpx(output, input)
+    clean_gpx(args.output_file, args.input_file)
