@@ -7,7 +7,7 @@ from scipy.spatial import ConvexHull
 from scipy.spatial import KDTree
 import logging
 import time
-import xc_scorer.optimization as optimization
+from . import optimization
 
 
 logger = logging.getLogger(__name__)
