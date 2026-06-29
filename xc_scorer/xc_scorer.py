@@ -115,7 +115,7 @@ class XCScorer:
             point.lat = row['lat']
             point.lon = row['lon']
             point.time = row['datetime'] if 'datetime' in row else row['time']
-            point.alt = row.get('gps_alt', row.get('pressure_altitude', 0))
+            point.alt = row.get('gps_alt', row.get('pressure_alt', 0))
 
             # Add to_dict method to point object
             def to_dict_method(self):
